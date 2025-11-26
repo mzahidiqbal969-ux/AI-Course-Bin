@@ -59,5 +59,7 @@ print(list_2)
 # movies.append(mov2)
 # print(movies)
  count= 1
- while count<=5 :
-     print("hello world")
+ while count <=5 :
+     print("hello")
+     count +=1
+     print(count)
