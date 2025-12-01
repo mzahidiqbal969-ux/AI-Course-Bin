@@ -58,8 +58,17 @@ print(list_2)
 # movies.append(mov2)
 # movies.append(mov2)
 # print(movies)
- count= 1
- while count <=5 :
+i= 1
+while i <=100 :
      print("hello")
-     count +=1
-     print(count)
+     i +=1
+#print the multiplication table of a number n.
+n = 4
+i=1
+while i<=10:
+     print(n*i)
+     i+=1
+
+
+
+
