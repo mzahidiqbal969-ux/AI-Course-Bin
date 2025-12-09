@@ -46,9 +46,9 @@ quantity=10
 bill=shoesprice*quantity
 print(bill)
 #Create two variables: length and width. Find the perimeter of a rectangle.
-len=10
+len1=10
 wid=3
-perimeter=2*(len+wid)
+perimeter=2*(len1+wid)
 print(perimeter)
 #Store an integer, float, and string in three variables and print their types
 number=10
@@ -76,4 +76,69 @@ value3=x*y
 print(value3)
 value4=x/y
 print(value4)
-
+#Take input from the user and print its data type
+name=input("print my name:")
+print(type(name))
+#Convert a string "100" into integer and add 50 to it
+str="100"
+str=int("100")
+print(str+50)
+#Convert integer 12 into float and print the result
+num1=12
+print(float(num1))
+#Create a list of your three favorite fruits.
+list=["mangoes","apples","alichi"]
+print(list)
+#Create a tuple containing your five exam marks
+marks=(78,45,67,78,79)
+print(marks)
+#Create a dictionary with keys: name, age, class
+student={"name" :"ali","age":35,"class":"10th"}
+print(student)
+#Create a set with unique numbers and show it removes duplicates
+s = {1, 2, 2, 3, 3}
+print(s)
+#Convert a float (e.g., 12.56) to integer
+height2=12.56
+print(int(height2))
+#Convert a list into a tuple
+marks=[50,56,67,89]
+print(tuple(marks))
+#Check the type of value stored in variable data = True
+data = True
+print(type(data))
+#Take a string and print its length
+city1="the name of city where we live is mahra"
+print(len(city1))
+#Print the first and last character of a string
+print(city1[0],city1[-1])
+#Convert any string to uppercase
+print(city1.upper())
+#Replace “a” with “@” in a given string.
+print(city1.replace("a","@"))
+#Count the number of words in a sentence
+sentence=input("enter the sentence:")
+words=sentence.split()
+word_count=len(words)
+print("number of words:",word_count)
+#Check if a string contains the word “python”.
+print("python"in sentence)
+#Take a string and reverse it.
+print(sentence[::-1])
+#Check if the string starts with “hello”.
+print(sentence.startswith("hello"))
+#Take a user input string and print every second character.
+print(sentence[::2])
+#print if the number is even or odd?
+num=int(input("enter the number:"))
+if num %2==0:
+    print("number is even")
+else:
+    print("number is odd")
+#Ask the user’s age and check if they are adult (18+).
+age=int(input("Enter the age of a person:"))
+if age>=18:
+    print("the person is adult")
+else:
+    print("the person is not adult")
+    
