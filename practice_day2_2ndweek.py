@@ -65,3 +65,6 @@ print(s1[-6::])
 print(s2[-28:-21:])
 print(s3[-36:-28:])
 print(len(s1))
+l=[3,5,3,5,8]
+l.remove()
+print(l)
