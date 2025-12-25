@@ -6,5 +6,7 @@ print(type(newspaperlist[1]))
 newspaperlist=(45,"Dawn",45.5,True)
 print(newspaperlist)
 print(type(newspaperlist))
-newspaperlist[2]=34.5
-print(newspaperlist)
+#newspaperlist[2]=34.5
+#print(newspaperlist)
+for item in newspaperlist:
+    print(item)
