@@ -68,5 +68,12 @@ print(c1)
 c2=np.arange(3,20,2)
 print(c2)
 
-m=np.array([[50,56,76][49,65,68]])
+m=np.array([[50,56,76],[49,65,68]])
 print(m)
+n=np.average(m)
+print(n)
+
+high_marks_in_each_subject=np.max(m,axis=0)
+print(high_marks_in_each_subject)
+overall_class_average=np.average(m)
+print(overall_class_average)
