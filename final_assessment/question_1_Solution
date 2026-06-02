@@ -1,0 +1,127 @@
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+
+from sklearn.linear_model import LinearRegression, LogisticRegression
+from sklearn.cluster import KMeans
+from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
+
+from sklearn.metrics import (
+    accuracy_score,
+    classification_report,
+    confusion_matrix,
+    mean_absolute_error,
+    mean_squared_error,
+    r2_score,
+    silhouette_score
+)
+
+df = pd.read_csv("final_assessment/AI-Adoption-in-Fortune-500-Companies/ai-adoption-fortune500-synthetic-dataset-2020-2025.csv")
+
+print(df.head())
+print(df.shape)
+print(df.info())
+
+print(df.describe())
+
+print(df.isnull().sum())
+
+print(df.nunique())
+
+plt.figure(figsize=(12,6))
+sns.countplot(data=df,x='Industry')
+plt.xticks(rotation=45)
+plt.show()
+
+sns.histplot(df['AI_ROI_Percent'],kde=True)
+plt.show()
+
+sns.heatmap(df.corr(numeric_only=True),
+            annot=True,
+            cmap='coolwarm')
+plt.show()
+
+sns.boxplot(data=df,
+            x='AI_Maturity_Level',
+            y='ROI')
+plt.show()
+
+X = df.drop('ROI',axis=1)
+y = df['ROI']
+
+for col in X.select_dtypes(include='object'):
+    X[col] = LabelEncoder().fit_transform(X[col])
+
+    X_train,X_test,y_train,y_test = train_test_split(
+    X,y,test_size=0.2,random_state=42
+)
+
+model = RandomForestRegressor()
+
+model.fit(X_train,y_train)
+
+pred = model.predict(X_test)
+
+print("MAE:",mean_absolute_error(y_test,pred))
+print("R2:",r2_score(y_test,pred))
+
+df['High_ROI'] = np.where(df['ROI']>df['ROI'].median(),1,0)
+
+X = df.drop(['ROI','High_ROI'],axis=1)
+y = df['High_ROI']
+
+for col in X.select_dtypes(include='object'):
+    X[col] = LabelEncoder().fit_transform(X[col])
+
+    X_train,X_test,y_train,y_test = train_test_split(
+    X,y,test_size=0.2,random_state=42
+)
+
+clf = RandomForestClassifier()
+
+clf.fit(X_train,y_train)
+
+pred = clf.predict(X_test)
+
+print("Accuracy:",accuracy_score(y_test,pred))
+print(classification_report(y_test,pred))
+
+features = df.select_dtypes(include=np.number)
+
+scaler = StandardScaler()
+
+scaled = scaler.fit_transform(features)
+
+kmeans = KMeans(n_clusters=4,random_state=42)
+
+clusters = kmeans.fit_predict(scaled)
+
+df['Cluster'] = clusters
+
+print(
+    silhouette_score(
+        scaled,
+        clusters
+    )
+)
+
+sns.scatterplot(
+    x=df['Investment'],
+    y=df['ROI'],
+    hue=df['Cluster']
+)
+plt.show()
+
+importance = pd.DataFrame({
+    "Feature":X.columns,
+    "Importance":clf.feature_importances_
+})
+
+importance.sort_values(
+    by='Importance',
+    ascending=False
+).head(10)
